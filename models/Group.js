@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const groupSchema = new mongoose.Schema({
   name: { type: String, required: true },
@@ -18,4 +18,4 @@ const groupSchema = new mongoose.Schema({
   createdAt: { type: Date, default: Date.now }
 });
 
-module.exports = mongoose.model("Group", groupSchema);
+export const Group = mongoose.model("Group", groupSchema);

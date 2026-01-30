@@ -1,15 +1,15 @@
-const User = require("../models/User");
-const bcrypt = require("bcryptjs");
+import User  from "../models/User.js";
+import bcrypt from "bcryptjs";
 
-exports.loginPage = (req, res) => {
+export const loginPage = (req, res) => {
   res.render("login", { title: "Login | SplitChain" });
 };
 
-exports.registerPage = (req, res) => {
+export const registerPage = (req, res) => {
   res.render("register", { title: "Register | SplitChain" });
 };
 
-exports.register = async (req, res) => {
+export const register = async (req, res) => {
   try {
     const { name, email, password, wallet } = req.body;
 
@@ -33,7 +33,7 @@ exports.register = async (req, res) => {
   }
 };
 
-exports.login = async (req, res) => {
+export const login = async (req, res) => {
   try {
     const { email, password } = req.body;
 
@@ -51,7 +51,7 @@ exports.login = async (req, res) => {
   }
 };
 
-exports.logout = (req, res) => {
+export const logout = (req, res) => {
   req.session.destroy(() => {
     res.redirect("/login");
   });

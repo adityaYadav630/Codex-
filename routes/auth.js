@@ -1,7 +1,7 @@
-const express = require("express");
+import express from "express";
 const router = express.Router();
-const authController = require("../controllers/authController");
-
+import { auth } from "../middleware/auth.js";
+import * as authController from "../controllers/authController.js";
 router.get("/auth/check", (req, res) => {
   res.json({ loggedIn: !!req.session.userId });
 });
@@ -14,4 +14,4 @@ router.post("/register", authController.register);
 
 router.get("/logout", authController.logout);
 
-module.exports = router;
+export const authRoutes = router;

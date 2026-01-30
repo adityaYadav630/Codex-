@@ -1,16 +1,19 @@
-const Expense = require("../models/Expense");
-const Group = require("../models/Group");
+import { Expense } from "../models/Expense.js";
+import { Group } from "../models/Group.js";
 
-exports.addExpensePage = async (req, res) => {
+/**
+ * GET: Add Expense Page
+ */
+export const addExpensePage = async (req, res) => {
   try {
-    const groupId = req.params.groupId;
+    const { groupId } = req.params;
 
     const group = await Group.findById(groupId);
     if (!group) return res.send("Group not found");
 
-    res.render("addExpense", { 
-      group, 
-      title: "Add Expense | SplitChain" 
+    res.render("addExpense", {
+      group,
+      title: "Add Expense | SplitChain"
     });
   } catch (err) {
     console.log(err);
@@ -18,7 +21,10 @@ exports.addExpensePage = async (req, res) => {
   }
 };
 
-exports.addExpense = async (req, res) => {
+/**
+ * POST: Add Expense
+ */
+export const addExpense = async (req, res) => {
   try {
     const { groupId, amount, category, date, notes, splitWith } = req.body;
 

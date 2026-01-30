@@ -1,9 +1,15 @@
 import express from "express";
 import contract from "../blockchain-bridge/contract.js";
-
+import { auth } from "../middleware/auth.js";
 const router = express.Router();
+import * as expenseController from "../controllers/expenseController.js";
+router.get("/add/:groupId", auth, expenseController.addExpensePage);
 
-router.post("/add-expense", async (req, res) => {
+router.post("/add", auth, expenseController.addExpense);
+
+router.get("/add/:groupId", auth, expenseController.addExpensePage);
+
+router.post("/add", async (req, res) => {
   try {
     const { title, amount, splitWith } = req.body;
 
@@ -11,7 +17,7 @@ router.post("/add-expense", async (req, res) => {
       title,
       splitWith,
       {
-        value: amount   // 👈 ETH yahan ja rahi hai
+        value: amount   
       }
     );
 

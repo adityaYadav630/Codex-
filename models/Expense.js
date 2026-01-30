@@ -1,5 +1,4 @@
-const mongoose = require("mongoose");
-
+import mongoose from "mongoose";
 const expenseSchema = new mongoose.Schema({
   group: { type: mongoose.Schema.Types.ObjectId, ref: "Group" },
   amount: Number,
@@ -10,4 +9,4 @@ const expenseSchema = new mongoose.Schema({
   splitWith: [String]
 }, { timestamps: true });
 
-module.exports = mongoose.model("Expense", expenseSchema);
+export const Expense = mongoose.model("Expense", expenseSchema);

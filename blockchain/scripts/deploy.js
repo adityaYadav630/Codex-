@@ -1,12 +1,13 @@
-import hre from "hardhat";
+const hre = require("hardhat");
 
 async function main() {
-  const Expense = await hre.ethers.getContractFactory("Expense");
-  const expense = await Expense.deploy();
+  const SplitChain = await hre.ethers.getContractFactory("SplitChain");
 
-  await expense.waitForDeployment();
+  const splitChain = await SplitChain.deploy();
 
-  console.log("✅ Contract deployed at:", await expense.getAddress());
+  await splitChain.waitForDeployment(); // 🔥 FIX HERE
+
+  console.log("SplitChain deployed to:", await splitChain.getAddress());
 }
 
 main().catch((error) => {

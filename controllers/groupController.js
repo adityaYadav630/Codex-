@@ -1,17 +1,32 @@
-const Group = require("../models/Group");
-const Expense = require("../models/Expense");
+import { Group } from "../models/Group.js";
+import { Expense } from "../models/Expense.js";
 
-exports.groupPage = async (req, res) => {
+export const groupPage = async (req, res) => {
   try {
     const groups = await Group.find({ owner: req.session.userId });
-    res.render("groups", { groups, title: "Your Groups | SplitChain" , user: req.user});
+    res.render("groups", { groups, title: "Your Groups | SplitChain" , user: res.locals.user});
   } catch (err) {
     console.log(err);
     res.render("groups", { groups: [] });
   }
 };
 
-exports.createGroup = async (req, res) => {
+export const addNote = async (req, res) => {
+  try {
+    const { note } = req.body;
+    const groupId = req.params.id;
+
+    if (!note) return res.send("Note missing");
+
+    // abhi dummy response
+    res.redirect(`/groups/${groupId}`);
+  } catch (err) {
+    console.log(err);
+    res.send("Error adding note");
+  }
+};
+
+export const createGroup = async (req, res) => {
   try {
     const { name, members } = req.body;
 
@@ -28,7 +43,7 @@ exports.createGroup = async (req, res) => {
   }
 };
 
-exports.groupDetails = async (req, res) => {
+export const groupDetails = async (req, res) => {
   try {
     const group = await Group.findById(req.params.id);
     if (!group) return res.send("Group not found");

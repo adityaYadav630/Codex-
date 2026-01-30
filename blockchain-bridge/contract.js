@@ -12,7 +12,7 @@ const abi = JSON.parse(fs.readFileSync(abiPath, "utf-8"));
 const provider = new ethers.JsonRpcProvider("http://127.0.0.1:8545");
 
 const PRIVATE_KEY = "0xdf57089febbacf7ba0bc227dafbffa9fc08a93fdc68e1e42411a14efcf23656e";
-const CONTRACT_ADDRESS = "";
+const CONTRACT_ADDRESS = "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512";
 
 const wallet = new ethers.Wallet(PRIVATE_KEY, provider);
 
