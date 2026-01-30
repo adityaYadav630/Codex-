@@ -1,13 +1,12 @@
-const hre = require("hardhat");
+import hre from "hardhat";
 
 async function main() {
-  // Use hre.ethers, no TS problem
-  const SplitChain = await hre.ethers.getContractFactory("SplitChain");
-  const splitChain = await SplitChain.deploy();
+  const Expense = await hre.ethers.getContractFactory("Expense");
+  const expense = await Expense.deploy();
 
-  await splitChain.deployed();
+  await expense.waitForDeployment();
 
-  console.log("SplitChain deployed to:", splitChain.address);
+  console.log("✅ Contract deployed at:", await expense.getAddress());
 }
 
 main().catch((error) => {
